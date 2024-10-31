@@ -75,6 +75,17 @@ function renderResults(location, results) {
     el('th', {}, 'Hiti'),
     el('th', {}, 'Úrkoma'),
   );
+
+  const rows = results.map(({ time, temperature, precipitation }) =>
+    el(
+      'tr',
+      {},
+      el('td', {}, time),
+      el('td', {}, temperature.toFixed(1)), // Ein kommutala
+      el('td', {}, precipitation.toFixed(1)) // Ein kommutala
+    )
+  );
+
   console.log(results);
   const body = el(
     'tr',
@@ -85,6 +96,8 @@ function renderResults(location, results) {
   );
 
   const resultsTable = el('table', { class: 'forecast' }, header, body);
+
+  rows.forEach(row => resultsTable.appendChild(row));
 
   renderIntoResultsContent(
     el(
